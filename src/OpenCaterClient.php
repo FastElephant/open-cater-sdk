@@ -289,6 +289,66 @@ class OpenCaterClient
     }
 
     /**
+     * 获取门店IM状态
+     * @param $bindShopId
+     * @return array
+     */
+    public function getImStatus($bindShopId)
+    {
+        $param = [
+            'bind_shop_id' => $bindShopId
+        ];
+        return $this->call('im/status', $param);
+    }
+
+    /**
+     * 设置门店IM状态
+     * @param $bindShopId
+     * @param $status
+     * @return array
+     */
+    public function setImStatus($bindShopId, $status)
+    {
+        $param = [
+            'bind_shop_id' => $bindShopId,
+            'status' => $status
+        ];
+        return $this->call('im/update-status', $param, true);
+    }
+
+    /**
+     * 获取消息已读状态
+     * @param $bindShopId
+     * @param $openUserId
+     * @param $msgId
+     * @return array
+     */
+    public function getMsgReadStatus($bindShopId, $openUserId, $msgId)
+    {
+        $param = [
+            'bind_shop_id' => $bindShopId,
+            'open_user_id' => $openUserId,
+            'msg_id' => $msgId
+        ];
+        return $this->call('im/msg-read-status', $param);
+    }
+
+    /**
+     * 获取会话最新已读时间
+     * @param $bindShopId
+     * @param $openUserId
+     * @return array
+     */
+    public function getUserLastReadTime($bindShopId, $openUserId)
+    {
+        $param = [
+            'bind_shop_id' => $bindShopId,
+            'open_user_id' => $openUserId,
+        ];
+        return $this->call('im/user-last-read-time', $param);
+    }
+
+    /**
      * @param $path
      * @param $param
      * @param bool $isPost
@@ -357,6 +417,10 @@ class OpenCaterClient
             'order/today-statistics' => '获取当日订单统计数据',
             'order/cancel-reason' => '获取取消订单原因选项',
             'order/cancel-order' => '取消订单',
+            'im/status' => '获取门店IM状态',
+            'im/update-status' => '设置门店IM状态',
+            'im/msg-read-status' => '获取消息已读状态',
+            'im/user-last-read-time' => '获取会话最新已读时间'
         ];
         return $toEventName[$path] ?? '未定义事件';
     }
