@@ -349,7 +349,7 @@ class OpenCaterClient
     }
 
     /**
-     * 同步到外卖小蜜
+     * 同步授权店铺至外卖小蜜
      * @return array
      */
     public function syncToCaterTool()
@@ -429,7 +429,8 @@ class OpenCaterClient
             'im/status' => '获取门店IM状态',
             'im/update-status' => '设置门店IM状态',
             'im/msg-read-status' => '获取消息已读状态',
-            'im/user-last-read-time' => '获取会话最新已读时间'
+            'im/user-last-read-time' => '获取会话最新已读时间',
+            'shop/sync-to-cater-tool' => '同步授权店铺至外卖小蜜'
         ];
         return $toEventName[$path] ?? '未定义事件';
     }
