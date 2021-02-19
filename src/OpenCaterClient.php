@@ -354,7 +354,7 @@ class OpenCaterClient
      */
     public function syncToCaterTool()
     {
-        return $this->call('shop/oauth/sync-to-cater-tool');
+        return $this->call('shop/sync-to-cater-tool');
     }
 
     /**
