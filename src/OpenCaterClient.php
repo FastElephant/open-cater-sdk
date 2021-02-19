@@ -349,6 +349,15 @@ class OpenCaterClient
     }
 
     /**
+     * 同步到外卖小蜜
+     * @return array
+     */
+    public function syncToCaterTool()
+    {
+        return $this->call('shop/oauth/sync-to-cater-tool');
+    }
+
+    /**
      * @param $path
      * @param $param
      * @param bool $isPost
