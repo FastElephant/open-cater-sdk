@@ -164,6 +164,15 @@ class OpenCaterClient
     }
 
     /**
+     * 获取授权过的店铺列表
+     * @return array
+     */
+    public function getShopListByCaterToolCode($caterToolCode)
+    {
+        return $this->call('shop/list-by-cater-tool-code', ['cater_tool_code' => $caterToolCode]);
+    }
+
+    /**
      * 获取取消订单原因选项
      * @return array
      */
@@ -430,7 +439,8 @@ class OpenCaterClient
             'im/update-status' => '设置门店IM状态',
             'im/msg-read-status' => '获取消息已读状态',
             'im/user-last-read-time' => '获取会话最新已读时间',
-            'shop/sync-to-cater-tool' => '同步授权店铺至外卖小蜜'
+            'shop/sync-to-cater-tool' => '同步授权店铺至外卖小蜜',
+            'shop/list-by-cater-tool-code' => '获取店铺列表（根据外卖小蜜商户ID）'
         ];
         return $toEventName[$path] ?? '未定义事件';
     }
