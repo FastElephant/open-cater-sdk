@@ -352,9 +352,9 @@ class OpenCaterClient
      * 同步授权店铺至外卖小蜜
      * @return array
      */
-    public function syncToCaterTool()
+    public function syncToCaterTool($caterToolCode)
     {
-        return $this->call('shop/sync-to-cater-tool');
+        return $this->call('shop/sync-to-cater-tool', ['cater_tool_code' => $caterToolCode]);
     }
 
     /**
