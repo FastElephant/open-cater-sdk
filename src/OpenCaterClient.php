@@ -169,7 +169,7 @@ class OpenCaterClient
      */
     public function getShopListByCaterToolCode($caterToolCode)
     {
-        return $this->call('shop/list-by-cater-tool-code', ['cater_tool_code' => $caterToolCode]);
+        return $this->call('cater-tool/shop/list', ['cater_tool_code' => $caterToolCode]);
     }
 
     /**
@@ -192,6 +192,20 @@ class OpenCaterClient
             'bind_shop_id' => $bindShopId,
         ];
         return $this->call('shop/delete', $param, true);
+    }
+
+    /**
+     * 删除授权门店
+     * @param $bindShopId
+     * @return array
+     */
+    public function deleteShopByCaterToolCode($bindShopId, $caterToolCode)
+    {
+        $param = [
+            'bind_shop_id' => $bindShopId,
+            'cater_tool_code' => $caterToolCode
+        ];
+        return $this->call('cater-tool/shop/delete', $param, true);
     }
 
     /**
@@ -363,7 +377,7 @@ class OpenCaterClient
      */
     public function syncToCaterTool($caterToolCode)
     {
-        return $this->call('shop/sync-to-cater-tool', ['cater_tool_code' => $caterToolCode]);
+        return $this->call('cater-tool/shop/sync', ['cater_tool_code' => $caterToolCode]);
     }
 
     /**
@@ -439,8 +453,9 @@ class OpenCaterClient
             'im/update-status' => '设置门店IM状态',
             'im/msg-read-status' => '获取消息已读状态',
             'im/user-last-read-time' => '获取会话最新已读时间',
-            'shop/sync-to-cater-tool' => '同步授权店铺至外卖小蜜',
-            'shop/list-by-cater-tool-code' => '获取店铺列表（根据外卖小蜜商户ID）'
+            'cater-tool/shop/sync' => '同步授权店铺至外卖小蜜',
+            'cater-tool/shop/list' => '获取店铺列表（根据外卖小蜜商户ID）',
+            'cater-tool/shop/delete' => '删除绑定店铺（根据外卖小蜜商户ID）'
         ];
         return $toEventName[$path] ?? '未定义事件';
     }
