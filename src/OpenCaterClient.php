@@ -167,9 +167,13 @@ class OpenCaterClient
      * 获取授权过的店铺列表
      * @return array
      */
-    public function getShopListByCaterToolCode($caterToolCode)
+    public function getShopListByCaterToolCode($caterToolCode, $bindShopId = '')
     {
-        return $this->call('cater-tool/shop/list', ['cater_tool_code' => $caterToolCode]);
+        $param = [
+            'cater_tool_code' => $caterToolCode,
+            'bind_shop_id' => $bindShopId
+        ];
+        return $this->call('cater-tool/shop/list', $param);
     }
 
     /**
