@@ -323,14 +323,14 @@ class OpenCaterClient
      * @param $msgId
      * @return array
      */
-    public function getMsgReadStatus($bindShopId, $openUserId, $msgId)
+    public function readImMsg($bindShopId, $openUserId, $msgId)
     {
         $param = [
             'bind_shop_id' => $bindShopId,
             'open_user_id' => $openUserId,
             'msg_id' => $msgId
         ];
-        return $this->call('im/msg-read-status', $param);
+        return $this->call('im/read-msg', $param);
     }
 
     /**
@@ -428,7 +428,7 @@ class OpenCaterClient
             'order/cancel-order' => '取消订单',
             'im/status' => '获取门店IM状态',
             'im/update-status' => '设置门店IM状态',
-            'im/msg-read-status' => '获取消息已读状态',
+            'im/read-msg' => '阅读IM消息',
             'im/user-last-read-time' => '获取会话最新已读时间',
             'cater-tool/shop/sync' => '同步授权店铺至外卖小蜜',
         ];
