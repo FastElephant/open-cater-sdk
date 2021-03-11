@@ -58,6 +58,12 @@ class OpenCaterClient
      */
     protected $response = [];
 
+    /**
+     * 绑定类型[1：接单类；2：非接单类]
+     * @var int
+     */
+    protected $bindType = 1;
+
     public function __construct($merchantId = 0, $platform = '', $shopId = 0)
     {
         $this->platform = $platform;
@@ -67,6 +73,14 @@ class OpenCaterClient
         $this->partnerCode = config('open-cater.partnerCode');
         $this->partnerSecret = config('open-cater.partnerSecret');
         $this->timeout = config('open-cater.timeout', 5);
+    }
+
+    /**
+     * @param int $bindType
+     */
+    public function setBindType($bindType = 2)
+    {
+        $this->bindType = $bindType;
     }
 
     /**
@@ -372,6 +386,7 @@ class OpenCaterClient
         $param['platform'] = $this->platform;
         $param['partner_shop_id'] = $this->shopId;
         $param['partner_merchant_id'] = $this->merchantId;
+        $param['bind_type'] = $this->bindType;
 
         $client = new Client(['verify' => false, 'timeout' => $this->timeout]);
 
