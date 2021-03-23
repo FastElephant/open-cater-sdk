@@ -245,6 +245,19 @@ class OpenCaterClient
     }
 
     /**
+     * 获取原始订单数据
+     * @param $orderId
+     * @return array
+     */
+    public function getOriginOrderDetail($orderId)
+    {
+        $param = [
+            'order_id' => $orderId
+        ];
+        return $this->call('order/origin-detail', $param);
+    }
+
+    /**
      * 取消订单
      * @param $orderId
      * @return array
@@ -441,6 +454,7 @@ class OpenCaterClient
             'order/today-statistics' => '获取当日订单统计数据',
             'order/cancel-reason' => '获取取消订单原因选项',
             'order/cancel-order' => '取消订单',
+            'order/origin-detail' => '获取订单原始数据',
             'im/status' => '获取门店IM状态',
             'im/update-status' => '设置门店IM状态',
             'im/read-msg' => '阅读IM消息',
