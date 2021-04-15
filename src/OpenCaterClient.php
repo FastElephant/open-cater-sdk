@@ -258,6 +258,19 @@ class OpenCaterClient
     }
 
     /**
+     * 获取菜品数据
+     * @param $orderId
+     * @return array
+     */
+    public function getDishDetail($orderId)
+    {
+        $param = [
+            'order_id' => $orderId
+        ];
+        return $this->call('order/dish-detail', $param);
+    }
+
+    /**
      * 取消订单
      * @param $orderId
      * @return array
@@ -460,6 +473,7 @@ class OpenCaterClient
             'im/read-msg' => '阅读IM消息',
             'im/user-last-read-time' => '获取会话最新已读时间',
             'cater-tool/shop/sync' => '同步授权店铺至外卖小蜜',
+            'order/dish-detail' => '获取菜品详情'
         ];
         return $toEventName[$path] ?? '未定义事件';
     }
