@@ -151,6 +151,21 @@ class OpenCaterClient
     }
 
     /**
+     * 修改x单工作状态
+     * @param $bindShopId
+     * @param int $status 1:开启；2：关闭
+     * @return array
+     */
+    public function updateXStatus($bindShopId, $status)
+    {
+        $param = [
+            'bind_shop_id' => $bindShopId,
+            'status' => $status
+        ];
+        return $this->call('shop/oauth/x-status', $param, true);
+    }
+
+    /**
      * 根据发货门店ID获取已绑定的商铺列表
      * @return array
      */
