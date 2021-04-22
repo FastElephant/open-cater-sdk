@@ -413,6 +413,59 @@ class OpenCaterClient
     }
 
     /**
+     * 获取门店评论列表
+     * @param $bindShopId
+     * @param $startTime
+     * @param $endTime
+     * @param int $page
+     * @param int $pageSize
+     * @param int $replyStatus
+     * @return array
+     */
+    public function getCommentByShopId($bindShopId, $startTime, $endTime, $page = 1, $pageSize = 20, $replyStatus = -1)
+    {
+        $param = [
+            'bind_shop_id' => $bindShopId,
+            'start_time' => $startTime,
+            'end_time' => $endTime,
+            'page' => $page,
+            'page_size' => $pageSize,
+            'reply_status' => $replyStatus
+        ];
+        return $this->call('comment/list', $param);
+    }
+
+    /**
+     * 回复评论
+     * @param $bindShopId
+     * @param $commentId
+     * @param $content
+     * @return array
+     */
+    public function replyComment($bindShopId, $commentId, $content)
+    {
+        $param = [
+            'bind_shop_id' => $bindShopId,
+            'comment_id' => $commentId,
+            'content' => $content
+        ];
+        return $this->call('comment/reply', $param, true);
+    }
+
+    /**
+     * 获取门店评分
+     * @param $bindShopId
+     * @return array
+     */
+    public function getShopCommentScore($bindShopId)
+    {
+        $param = [
+            'bind_shop_id' => $bindShopId,
+        ];
+        return $this->call('comment/score', $param);
+    }
+
+    /**
      * @param $path
      * @param $param
      * @param bool $isPost
@@ -488,7 +541,10 @@ class OpenCaterClient
             'im/read-msg' => '阅读IM消息',
             'im/user-last-read-time' => '获取会话最新已读时间',
             'cater-tool/shop/sync' => '同步授权店铺至外卖小蜜',
-            'order/dish-detail' => '获取菜品详情'
+            'order/dish-detail' => '获取菜品详情',
+            'comment/list' => '获取评论列表',
+            'comment/reply' => '回复评论',
+            'comment/score' => '获取门店评分'
         ];
         return $toEventName[$path] ?? '未定义事件';
     }
