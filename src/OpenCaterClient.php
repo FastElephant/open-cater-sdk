@@ -193,6 +193,19 @@ class OpenCaterClient
     }
 
     /**
+     * 获取店铺详情
+     * @param $bindShopId
+     * @return array
+     */
+    public function getShopDetail($bindShopId)
+    {
+        $param = [
+            'bind_shop_id' => $bindShopId,
+        ];
+        return $this->call('shop/detail', $param);
+    }
+
+    /**
      * 获取取消订单原因选项
      * @return array
      */
@@ -544,7 +557,8 @@ class OpenCaterClient
             'order/dish-detail' => '获取菜品详情',
             'comment/list' => '获取评论列表',
             'comment/reply' => '回复评论',
-            'comment/score' => '获取门店评分'
+            'comment/score' => '获取门店评分',
+            'shop/detail' => '获取店铺详情'
         ];
         return $toEventName[$path] ?? '未定义事件';
     }
