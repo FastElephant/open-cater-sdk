@@ -314,6 +314,19 @@ class OpenCaterClient
     }
 
     /**
+     * 完成订单
+     * @param $orderId
+     * @return array
+     */
+    public function completeOrder($orderId)
+    {
+        $param = [
+            'order_id' => $orderId,
+        ];
+        return $this->call('order/complete-order', $param, true);
+    }
+
+    /**
      * 订单预计出餐时间
      * @param $orderId
      * @param $datetime
@@ -558,7 +571,8 @@ class OpenCaterClient
             'comment/list' => '获取评论列表',
             'comment/reply' => '回复评论',
             'comment/score' => '获取门店评分',
-            'shop/detail' => '获取店铺详情'
+            'shop/detail' => '获取店铺详情',
+            'order/complete-order' => '完成订单'
         ];
         return $toEventName[$path] ?? '未定义事件';
     }
