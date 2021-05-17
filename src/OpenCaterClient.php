@@ -349,7 +349,7 @@ class OpenCaterClient
      * @param $riderPhone
      * @return array
      */
-    public function syncDeliveryState($orderId, $state, $riderName, $riderPhone)
+    public function syncDeliveryState($orderId, $state, $riderName = '', $riderPhone = '')
     {
         $param = [
             'order_id' => $orderId,
