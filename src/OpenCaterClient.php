@@ -492,6 +492,51 @@ class OpenCaterClient
     }
 
     /**
+     * 获取配送费
+     * @param $orderId
+     * @return array
+     */
+    public function getDeliveryFee($orderId)
+    {
+        $param = [
+            'order_id' => $orderId,
+        ];
+        return $this->call('order/delivery/fee', $param);
+    }
+
+    /**
+     * 呼叫配送
+     * @param $orderId
+     * @param int $deliveryFee 配送费，必填
+     * @param int $gratuityFee 小费，选填
+     * @param string $couponViewId 优惠券id，选填
+     * @return array
+     */
+    public function callDelivery($orderId, $deliveryFee = 0, $gratuityFee = 0, $couponViewId = '')
+    {
+        $param = [
+            'order_id' => $orderId,
+            'delivery_fee' => $deliveryFee,
+            'gratuity_fee' => $gratuityFee,
+            'coupon_view_id' => $couponViewId
+        ];
+        return $this->call('order/delivery/call', $param, true);
+    }
+
+    /**
+     * 取消配送
+     * @param $orderId
+     * @return array
+     */
+    public function cancelDelivery($orderId)
+    {
+        $param = [
+            'order_id' => $orderId,
+        ];
+        return $this->call('order/delivery/cancel', $param, true);
+    }
+
+    /**
      * @param $path
      * @param $param
      * @param bool $isPost
