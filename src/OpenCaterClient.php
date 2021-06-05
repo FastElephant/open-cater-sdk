@@ -617,7 +617,10 @@ class OpenCaterClient
             'comment/reply' => '回复评论',
             'comment/score' => '获取门店评分',
             'shop/detail' => '获取店铺详情',
-            'order/complete-order' => '完成订单'
+            'order/complete-order' => '完成订单',
+            'order/delivery/fee' => '获取配送费',
+            'order/delivery/call' => '呼叫配送',
+            'order/delivery/cancel' => '取消配送'
         ];
         return $toEventName[$path] ?? '未定义事件';
     }
