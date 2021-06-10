@@ -193,6 +193,15 @@ class OpenCaterClient
     }
 
     /**
+     * 获取商户绑定的无冲突epid
+     * @return array
+     */
+    public function getXCodes()
+    {
+        return $this->call('shop/oauth/x-codes');
+    }
+
+    /**
      * 获取店铺详情
      * @param $bindShopId
      * @return array
@@ -324,6 +333,15 @@ class OpenCaterClient
             'order_id' => $orderId,
         ];
         return $this->call('order/complete-order', $param, true);
+    }
+
+    /**
+     * 同步无冲突订单
+     * @return array
+     */
+    public function syncXOrder()
+    {
+        return $this->call('order/sync-x-order');
     }
 
     /**
@@ -620,7 +638,9 @@ class OpenCaterClient
             'order/complete-order' => '完成订单',
             'order/delivery/fee' => '获取配送费',
             'order/delivery/call' => '呼叫配送',
-            'order/delivery/cancel' => '取消配送'
+            'order/delivery/cancel' => '取消配送',
+            'shop/oauth/x-codes' => '获取无冲突店铺epid',
+            'order/sync-x-order' => '同步无冲突订单'
         ];
         return $toEventName[$path] ?? '未定义事件';
     }
