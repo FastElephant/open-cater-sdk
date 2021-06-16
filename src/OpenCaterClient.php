@@ -341,6 +341,7 @@ class OpenCaterClient
      */
     public function syncXOrder()
     {
+        $this->setBindType(3);
         return $this->call('order/sync-x-order');
     }
 
