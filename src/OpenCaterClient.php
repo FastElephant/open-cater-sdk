@@ -596,7 +596,7 @@ class OpenCaterClient
         $this->response = $arrResponse;
 
         if ($arrResponse['code'] != 0) {
-            return ['code' => 500, 'message' => $arrResponse['message']];
+            return ['code' => $arrResponse['code'] ?? 500, 'message' => $arrResponse['message']];
         }
 
         return ['code' => 0, 'result' => $arrResponse['result']];
