@@ -114,6 +114,7 @@ class OpenCaterClient
 
     /**
      * 获取解绑地址
+     * @param $bindShopId
      * @return array
      */
     public function getUnbindUrl($bindShopId)
@@ -134,7 +135,7 @@ class OpenCaterClient
         $param = [
             'bind_shop_id' => $bindShopId,
         ];
-        return $this->call('shop/oauth/rebind', $param, true);
+        return $this->call('shop/oauth/rebind', $param);
     }
 
     /**
@@ -147,13 +148,13 @@ class OpenCaterClient
         $param = [
             'bind_shop_id' => $bindShopId,
         ];
-        return $this->call('shop/oauth/unbind', $param, true);
+        return $this->call('shop/oauth/unbind', $param);
     }
 
     /**
      * 修改x单工作状态
      * @param $bindShopId
-     * @param int $status 1:开启；2：关闭
+     * @param $status
      * @return array
      */
     public function updateXStatus($bindShopId, $status)
@@ -162,7 +163,7 @@ class OpenCaterClient
             'bind_shop_id' => $bindShopId,
             'status' => $status
         ];
-        return $this->call('shop/oauth/x-status', $param, true);
+        return $this->call('shop/oauth/x-status', $param);
     }
 
     /**
@@ -233,7 +234,7 @@ class OpenCaterClient
         $param = [
             'bind_shop_id' => $bindShopId,
         ];
-        return $this->call('shop/delete', $param, true);
+        return $this->call('shop/delete', $param);
     }
 
     /**
@@ -278,7 +279,7 @@ class OpenCaterClient
         $param = [
             'order_id' => $orderId
         ];
-        return $this->call('order/confirm-order', $param, true);
+        return $this->call('order/confirm-order', $param);
     }
 
     /**
@@ -310,6 +311,8 @@ class OpenCaterClient
     /**
      * 取消订单
      * @param $orderId
+     * @param $type
+     * @param $remark
      * @return array
      */
     public function cancelOrder($orderId, $type, $remark)
@@ -319,7 +322,7 @@ class OpenCaterClient
             'type' => $type,
             'remark' => $remark
         ];
-        return $this->call('order/cancel-order', $param, true);
+        return $this->call('order/cancel-order', $param);
     }
 
     /**
@@ -332,7 +335,7 @@ class OpenCaterClient
         $param = [
             'order_id' => $orderId,
         ];
-        return $this->call('order/complete-order', $param, true);
+        return $this->call('order/complete-order', $param);
     }
 
     /**
@@ -357,7 +360,7 @@ class OpenCaterClient
             'order_id' => $orderId,
             'datetime' => $datetime
         ];
-        return $this->call('order/predict-order-finish-time', $param, true);
+        return $this->call('order/predict-order-finish-time', $param);
     }
 
     /**
@@ -376,7 +379,7 @@ class OpenCaterClient
             'rider_phone' => $riderPhone,
             'state' => $state
         ];
-        return $this->call('order/delivery/sync-state', $param, true);
+        return $this->call('order/delivery/sync-state', $param);
     }
 
     /**
@@ -413,7 +416,7 @@ class OpenCaterClient
             'bind_shop_id' => $bindShopId,
             'status' => $status
         ];
-        return $this->call('im/update-status', $param, true);
+        return $this->call('im/update-status', $param);
     }
 
     /**
@@ -450,6 +453,7 @@ class OpenCaterClient
 
     /**
      * 同步授权店铺至外卖小蜜
+     * @param $caterToolCode
      * @return array
      */
     public function syncToCaterTool($caterToolCode)
@@ -494,7 +498,7 @@ class OpenCaterClient
             'comment_id' => $commentId,
             'content' => $content
         ];
-        return $this->call('comment/reply', $param, true);
+        return $this->call('comment/reply', $param);
     }
 
     /**
@@ -539,7 +543,7 @@ class OpenCaterClient
             'gratuity_fee' => $gratuityFee,
             'coupon_view_id' => $couponViewId
         ];
-        return $this->call('order/delivery/call', $param, true);
+        return $this->call('order/delivery/call', $param);
     }
 
     /**
@@ -552,7 +556,7 @@ class OpenCaterClient
         $param = [
             'order_id' => $orderId,
         ];
-        return $this->call('order/delivery/cancel', $param, true);
+        return $this->call('order/delivery/cancel', $param);
     }
 
     /**
@@ -561,7 +565,7 @@ class OpenCaterClient
      * @param bool $isPost
      * @return array
      */
-    protected function call($path, $param = [], $isPost = false)
+    protected function call($path, $param = [], $isPost = true)
     {
         $apiUrl = $this->url . $path;
 
