@@ -589,12 +589,12 @@ class OpenCaterClient
         $this->monitorProcess($path, json_encode($param, JSON_UNESCAPED_UNICODE), $strResponse);
 
         if (!$strResponse) {
-            return ['code' => 500, 'message' => '响应值为空'];
+            return ['code' => 555, 'message' => '响应值为空'];
         }
 
         $arrResponse = json_decode($strResponse, true);
         if (!$arrResponse) {
-            return ['code' => 500, 'message' => '响应值格式错误'];
+            return ['code' => 555, 'message' => '响应值格式错误'];
         }
 
         $this->response = $arrResponse;
