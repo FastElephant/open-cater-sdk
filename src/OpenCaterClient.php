@@ -254,13 +254,15 @@ class OpenCaterClient
      * 同步菜品
      * @param $bindShopId
      * @param int $isAsync
+     * @param string $notifyUrl
      * @return array
      */
-    public function syncProduct($bindShopId, $isAsync = 0)
+    public function syncProduct($bindShopId, $isAsync = 0, $notifyUrl = '')
     {
         $param = [
             'bind_shop_id' => $bindShopId,
-            'is_async' => $isAsync
+            'is_async' => $isAsync,
+            'notify_url' => $notifyUrl
         ];
         return $this->call('product/sync', $param);
     }
