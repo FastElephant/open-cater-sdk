@@ -251,6 +251,21 @@ class OpenCaterClient
     }
 
     /**
+     * 同步菜品
+     * @param $bindShopId
+     * @param int $isAsync
+     * @return array
+     */
+    public function syncProduct($bindShopId, $isAsync = 0)
+    {
+        $param = [
+            'bind_shop_id' => $bindShopId,
+            'is_async' => $isAsync
+        ];
+        return $this->call('product/sync', $param);
+    }
+
+    /**
      * 获取订单列表
      * @param $bindShopId
      * @param $date
