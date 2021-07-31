@@ -152,18 +152,16 @@ class OpenCaterClient
     }
 
     /**
-     * 修改x单工作状态
-     * @param $bindShopId
-     * @param $status
+     * 根据手机号同步授权
+     * @param $phone
      * @return array
      */
-    public function updateXStatus($bindShopId, $status)
+    public function syncAuth($phone)
     {
         $param = [
-            'bind_shop_id' => $bindShopId,
-            'status' => $status
+            'phone' => $phone,
         ];
-        return $this->call('shop/oauth/x-status', $param);
+        return $this->call('shop/oauth-mirror/sync', $param);
     }
 
     /**
@@ -191,15 +189,6 @@ class OpenCaterClient
     public function getShopList()
     {
         return $this->call('shop/list');
-    }
-
-    /**
-     * 获取商户绑定的无冲突epid
-     * @return array
-     */
-    public function getXCodes()
-    {
-        return $this->call('shop/oauth/x-codes');
     }
 
     /**
@@ -356,16 +345,6 @@ class OpenCaterClient
     }
 
     /**
-     * 同步无冲突订单
-     * @return array
-     */
-    public function syncXOrder()
-    {
-        $this->setBindType(3);
-        return $this->call('order/sync-x-order');
-    }
-
-    /**
      * 订单预计出餐时间
      * @param $orderId
      * @param $datetime
@@ -466,16 +445,6 @@ class OpenCaterClient
             'open_user_id' => $openUserId,
         ];
         return $this->call('im/user-last-read-time', $param);
-    }
-
-    /**
-     * 同步授权店铺至外卖小蜜
-     * @param $caterToolCode
-     * @return array
-     */
-    public function syncToCaterTool($caterToolCode)
-    {
-        return $this->call('cater-tool/shop/sync', ['cater_tool_code' => $caterToolCode]);
     }
 
     /**
@@ -640,6 +609,8 @@ class OpenCaterClient
             'shop/oauth/unbind' => '直接解绑门店（软解绑）',
             'shop/list' => '获取已绑定店铺列表',
             'shop/delete' => '删除绑定店铺',
+            'shop/oauth-mirror/sync' => '同步授权',
+            'shop/detail' => '获取店铺详情',
             'order/list' => '获取订单列表',
             'order/confirm-order' => '确认接单',
             'order/predict-order-finish-time' => '订单预计出餐时间',
@@ -648,22 +619,18 @@ class OpenCaterClient
             'order/cancel-reason' => '获取取消订单原因选项',
             'order/cancel-order' => '取消订单',
             'order/origin-detail' => '获取订单原始数据',
-            'im/status' => '获取门店IM状态',
-            'im/update-status' => '设置门店IM状态',
-            'im/read-msg' => '阅读IM消息',
-            'im/user-last-read-time' => '获取会话最新已读时间',
-            'cater-tool/shop/sync' => '同步授权店铺至外卖小蜜',
             'order/dish-detail' => '获取菜品详情',
-            'comment/list' => '获取评论列表',
-            'comment/reply' => '回复评论',
-            'comment/score' => '获取门店评分',
-            'shop/detail' => '获取店铺详情',
             'order/complete-order' => '完成订单',
             'order/delivery/fee' => '获取配送费',
             'order/delivery/call' => '呼叫配送',
             'order/delivery/cancel' => '取消配送',
-            'shop/oauth/x-codes' => '获取无冲突店铺epid',
-            'order/sync-x-order' => '同步无冲突订单'
+            'im/status' => '获取门店IM状态',
+            'im/update-status' => '设置门店IM状态',
+            'im/read-msg' => '阅读IM消息',
+            'im/user-last-read-time' => '获取会话最新已读时间',
+            'comment/list' => '获取评论列表',
+            'comment/reply' => '回复评论',
+            'comment/score' => '获取门店评分',
         ];
         return $toEventName[$path] ?? '未定义事件';
     }
