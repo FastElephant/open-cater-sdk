@@ -515,21 +515,21 @@ class OpenCaterClient
 
     /**
      * 呼叫配送
-     * @param $outTradeNo
+     * @param $partnerOrderId
      * @param $orderId
      * @param int $deliveryFee
      * @param int $gratuityFee
      * @param string $couponViewId
      * @return array
      */
-    public function callDelivery($outTradeNo, $orderId, $deliveryFee = 0, $gratuityFee = 0, $couponViewId = '')
+    public function callDelivery($partnerOrderId, $orderId, $deliveryFee = 0, $gratuityFee = 0, $couponViewId = '')
     {
         $param = [
+            'partner_order_id' => $partnerOrderId,
             'order_id' => $orderId,
             'delivery_fee' => $deliveryFee,
             'gratuity_fee' => $gratuityFee,
             'coupon_view_id' => $couponViewId,
-            'out_trade_no' => $outTradeNo,
         ];
         return $this->call('order/delivery/call', $param, true);
     }
