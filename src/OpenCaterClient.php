@@ -531,7 +531,7 @@ class OpenCaterClient
             'gratuity_fee' => $gratuityFee,
             'coupon_view_id' => $couponViewId,
         ];
-        return $this->call('order/delivery/call', $param, true);
+        return $this->call('order/delivery/call', $param);
     }
 
     /**
@@ -550,29 +550,26 @@ class OpenCaterClient
     /**
      * @param $path
      * @param $param
-     * @param bool $isPost
      * @return array
      */
-    protected function call($path, $param = [], $isPost = true)
+    protected function call($path, $param = [])
     {
         $apiUrl = $this->url . $path;
 
-        $param['partner_secret'] = $this->partnerSecret;
         $param['partner_code'] = $this->partnerCode;
         $param['platform'] = $this->platform;
         $param['partner_shop_id'] = $this->shopId;
         $param['partner_merchant_id'] = $this->merchantId;
         $param['bind_type'] = $this->bindType;
+        $param['version'] = '1.0';
+        $param['timestamp'] = time();
+        $param['sign'] = $this->makeSign($this->partnerCode, $this->partnerSecret, $param, $param['timestamp']);
 
         $client = new Client(['verify' => false, 'timeout' => $this->timeout]);
 
         $this->request = $param;
 
-        if ($isPost) {
-            $strResponse = $client->post($apiUrl, ['json' => $param])->getBody()->getContents();
-        } else {
-            $strResponse = $client->get($apiUrl, ['query' => $param])->getBody()->getContents();
-        }
+        $strResponse = $client->post($apiUrl, ['json' => $param])->getBody()->getContents();
 
         $this->monitorProcess($path, json_encode($param, JSON_UNESCAPED_UNICODE), $strResponse);
 
@@ -635,6 +632,46 @@ class OpenCaterClient
             'comment/score' => '获取门店评分',
         ];
         return $toEventName[$path] ?? '未定义事件';
+    }
+
+    /**
+     * 签名
+     * @param $code
+     * @param $secret
+     * @param $param
+     * @param $time
+     * @return string
+     */
+    protected function makeSign($code, $secret, $param, $time)
+    {
+        $tmpArr = array(
+            "partner_code" => $code,
+            "timestamp" => $time,
+        );
+
+        foreach ($param as $k => $v) {
+            $tmpArr[$k] = $v;
+        }
+
+        ksort($tmpArr);
+
+        $str = $secret;
+
+        foreach ($tmpArr as $k => $v) {
+            if ($v === false) {
+                $v = 'false';
+            }
+            if ($v === true) {
+                $v = 'true';
+            }
+            if (empty($v) && $v != 0) {
+                continue;
+            }
+            $str .= $k . $v;
+        }
+
+        $signature = sha1($str);
+        return strtolower($signature);
     }
 
     /**
