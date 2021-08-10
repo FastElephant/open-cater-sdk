@@ -64,6 +64,12 @@ class OpenCaterClient
      */
     protected $bindType = 1;
 
+    /**
+     * 版本号
+     * @var int
+     */
+    protected $version = 1;
+
     public function __construct($merchantId = 0, $platform = '', $shopId = 0)
     {
         $this->platform = $platform;
@@ -73,6 +79,14 @@ class OpenCaterClient
         $this->partnerCode = config('open-cater.partnerCode');
         $this->partnerSecret = config('open-cater.partnerSecret');
         $this->timeout = config('open-cater.timeout', 5);
+    }
+
+    /**
+     * @param $version
+     */
+    public function setVersion($version)
+    {
+        $this->version = $version;
     }
 
     /**
@@ -561,7 +575,7 @@ class OpenCaterClient
         $param['partner_shop_id'] = $this->shopId;
         $param['partner_merchant_id'] = $this->merchantId;
         $param['bind_type'] = $this->bindType;
-        $param['version'] = '1.0';
+        $param['version'] = $this->version;
         $param['timestamp'] = time();
         $param['sign'] = $this->makeSign($this->partnerCode, $this->partnerSecret, $param, $param['timestamp']);
 
