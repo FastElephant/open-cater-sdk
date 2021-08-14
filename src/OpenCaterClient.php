@@ -47,6 +47,11 @@ class OpenCaterClient
     protected $merchantId = 0;
 
     /**
+     * @var string
+     */
+    protected $requestUrl = '';
+
+    /**
      * 请求值
      * @var array
      */
@@ -79,6 +84,14 @@ class OpenCaterClient
         $this->partnerCode = config('open-cater.partnerCode');
         $this->partnerSecret = config('open-cater.partnerSecret');
         $this->timeout = config('open-cater.timeout', 5);
+    }
+
+    /**
+     * @return string
+     */
+    public function getRequestUrl(): string
+    {
+        return $this->requestUrl;
     }
 
     /**
@@ -569,6 +582,8 @@ class OpenCaterClient
     protected function call($path, $param = [])
     {
         $apiUrl = $this->url . $path;
+
+        $this->requestUrl = $apiUrl;
 
         $param['partner_code'] = $this->partnerCode;
         $param['platform'] = $this->platform;
