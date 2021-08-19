@@ -303,6 +303,23 @@ class OpenCaterClient
     }
 
     /**
+     * 批量获取订单详情
+     * @param $bindShopId
+     * @param $orderId
+     * @return array
+     */
+    public function batchQueryOrder($bindShopId, $orderId)
+    {
+        if (!is_array($orderId)) $orderId = [$orderId];
+        $param = [
+            'bind_shop_id' => $bindShopId,
+            'order_id' => implode(',', $orderId)
+        ];
+        return $this->call('order/batch-query-detail', $param);
+    }
+
+
+    /**
      * 确认接单
      * @param $orderId
      * @return array
@@ -647,6 +664,7 @@ class OpenCaterClient
             'shop/oauth-mirror/sync' => '同步授权',
             'shop/detail' => '获取店铺详情',
             'order/list' => '获取订单列表',
+            'order/batch-query-detail' => '批量获取订单详情',
             'order/confirm-order' => '确认接单',
             'order/predict-order-finish-time' => '订单预计出餐时间',
             'order/delivery/sync-state' => '同步自配送状态',
