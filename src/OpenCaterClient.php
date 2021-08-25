@@ -90,7 +90,7 @@ class OpenCaterClient
         $this->platform = $platform;
         $this->shopId = $shopId;
         $this->merchantId = $merchantId;
-        $this->url = config('open-cater.apiUrl');
+        $this->url = in_array($platform, ['eleme', 'eleme.retail']) ? config('open-cater.jstApiUrl') : config('open-cater.apiUrl');
         $this->partnerCode = config('open-cater.partnerCode');
         $this->partnerSecret = config('open-cater.partnerSecret');
         $this->timeout = config('open-cater.timeout', 5);

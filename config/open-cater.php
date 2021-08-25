@@ -4,6 +4,8 @@ return [
 
     'apiUrl' => '',
 
+    'jstApiUrl' => '',
+
     'partnerCode' => '',
 
     'partnerSecret' => '',
