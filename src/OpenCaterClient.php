@@ -7,13 +7,14 @@ use FastElephant\OpenCater\Module\Delivery;
 use FastElephant\OpenCater\Module\Im;
 use FastElephant\OpenCater\Module\Oauth;
 use FastElephant\OpenCater\Module\Order;
+use FastElephant\OpenCater\Module\Pick;
 use FastElephant\OpenCater\Module\Product;
 use FastElephant\OpenCater\Module\Shop;
 use GuzzleHttp\Client;
 
 class OpenCaterClient
 {
-    use Order, Delivery, Product, Shop, Oauth, Comment, Im;
+    use Order, Delivery, Product, Shop, Oauth, Comment, Im, Pick;
 
     /**
      * 请求地址
@@ -210,7 +211,7 @@ class OpenCaterClient
             'order/list' => '获取订单列表',
             'order/batch-query-detail' => '批量获取订单详情',
             'order/confirm-order' => '确认接单',
-            'order/predict-order-finish-time' => '订单预计出餐时间',
+            'order/pick/predict-finish-time' => '预计出餐时间',
             'order/delivery/sync-state' => '同步自配送状态',
             'order/today-statistics' => '获取当日订单统计数据',
             'order/cancel-reason' => '获取取消订单原因选项',

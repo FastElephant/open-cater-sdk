@@ -123,21 +123,6 @@ trait Order
     }
 
     /**
-     * 订单预计出餐时间
-     * @param $orderId
-     * @param $datetime
-     * @return array
-     */
-    public function predictOrderFinishTime($orderId, $datetime)
-    {
-        $param = [
-            'order_id' => $orderId,
-            'datetime' => $datetime
-        ];
-        return $this->call('order/predict-order-finish-time', $param);
-    }
-
-    /**
      * 获取当日订单统计数据
      * @return array
      */
