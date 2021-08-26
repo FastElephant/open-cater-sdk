@@ -212,6 +212,7 @@ class OpenCaterClient
             'order/batch-query-detail' => '批量获取订单详情',
             'order/confirm-order' => '确认接单',
             'order/pick/predict-finish-time' => '预计出餐时间',
+            'order/pick/finish' => '完成出餐',
             'order/delivery/sync-state' => '同步自配送状态',
             'order/today-statistics' => '获取当日订单统计数据',
             'order/cancel-reason' => '获取取消订单原因选项',
