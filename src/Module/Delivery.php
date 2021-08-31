@@ -33,16 +33,17 @@ trait Delivery
      * @param $orderId
      * @param $latitude
      * @param $longitude
-     * @param $altitude
-     * @return mixed
+     * @param string $state
+     * @return array
      */
-    public function syncRiderLocation($orderId, $latitude, $longitude, $altitude = '19.12')
+    public function syncRiderLocation($orderId, $latitude, $longitude, $state = '')
     {
         $param = [
             'order_id' => $orderId,
             'latitude' => $latitude,
             'longitude' => $longitude,
-            'altitude' => $altitude
+            'altitude' => '19.12',
+            'state' => $state
         ];
         return $this->call('order/delivery/sync-location', $param);
     }
