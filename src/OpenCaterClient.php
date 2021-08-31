@@ -214,6 +214,7 @@ class OpenCaterClient
             'order/pick/predict-finish-time' => '预计出餐时间',
             'order/pick/finish' => '完成出餐',
             'order/delivery/sync-state' => '同步自配送状态',
+            'order/delivery/sync-location' => '同步骑手位置',
             'order/today-statistics' => '获取当日订单统计数据',
             'order/cancel-reason' => '获取取消订单原因选项',
             'order/cancel-order' => '取消订单',

@@ -29,6 +29,25 @@ trait Delivery
     }
 
     /**
+     * 同步自配送骑手位置
+     * @param $orderId
+     * @param $latitude
+     * @param $longitude
+     * @param $altitude
+     * @return mixed
+     */
+    public function syncRiderLocation($orderId, $latitude, $longitude, $altitude = '19.12')
+    {
+        $param = [
+            'order_id' => $orderId,
+            'latitude' => $latitude,
+            'longitude' => $longitude,
+            'altitude' => $altitude
+        ];
+        return $this->call('order/delivery/sync-location', $param);
+    }
+
+    /**
      * 获取配送费
      * @param $orderId
      * @return array
