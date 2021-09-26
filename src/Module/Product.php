@@ -38,4 +38,14 @@ trait Product
         ];
         return $this->call('product/sync', $param);
     }
+
+    /**
+     * 查询同步结果
+     * @param $taskId
+     * @return mixed
+     */
+    public function syncProductResult($taskId)
+    {
+        return $this->call('product/sync-result', ['task_id' => $taskId]);
+    }
 }
