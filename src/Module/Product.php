@@ -10,16 +10,16 @@ namespace FastElephant\OpenCater\Module;
 trait Product
 {
     /**
-     * 一次性获取所有商品列表
+     * 查询商品报告地址
      * @param $bindShopId
      * @return array
      */
-    public function getAllProduct($bindShopId)
+    public function queryProductReport($bindShopId)
     {
         $param = [
             'bind_shop_id' => $bindShopId,
         ];
-        return $this->call('product/list', $param);
+        return $this->call('product/report', $param);
     }
 
     /**

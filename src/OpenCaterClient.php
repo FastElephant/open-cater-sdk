@@ -196,7 +196,8 @@ class OpenCaterClient
     protected function pathToEventName($path)
     {
         $toEventName = [
-            'product/list' => '获取全部菜品',
+            'product/report' => '查询菜品报告地址',
+            'product/sync-result' => '查询同步菜品结果',
             'product/sync' => '同步菜品',
             'shop/oauth/bind-url' => '获取绑定地址',
             'shop/oauth/unbind-url' => '获取解绑地址',
