@@ -165,8 +165,7 @@ class OpenCaterClient
         try {
             $strResponse = $client->post($apiUrl, ['json' => $param])->getBody()->getContents();
         } catch (\Exception $e) {
-            $errMsg = $e->getMessage();
-            $strResponse = '';
+            return ['code' => 550, 'message' => $e->getMessage()];
         }
 
         $this->monitorProcess($path, json_encode($param, JSON_UNESCAPED_UNICODE), $strResponse);
