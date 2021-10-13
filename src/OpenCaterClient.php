@@ -160,18 +160,17 @@ class OpenCaterClient
 
         $this->request = $param;
 
-        $errMsg = '';
-
         try {
             $strResponse = $client->post($apiUrl, ['json' => $param])->getBody()->getContents();
         } catch (\Exception $e) {
-            return ['code' => 550, 'message' => $e->getMessage()];
+            $strResponse = $e->getMessage();
+            return ['code' => 550, 'message' => $strResponse];
+        } finally {
+            $this->monitorProcess($path, json_encode($param, JSON_UNESCAPED_UNICODE), $strResponse);
         }
 
-        $this->monitorProcess($path, json_encode($param, JSON_UNESCAPED_UNICODE), $strResponse);
-
         if (!$strResponse) {
-            return ['code' => 555, 'message' => $errMsg ?: '响应值为空'];
+            return ['code' => 555, 'message' => '响应值为空'];
         }
 
         $arrResponse = json_decode($strResponse, true);
