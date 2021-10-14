@@ -160,13 +160,16 @@ class OpenCaterClient
 
         $this->request = $param;
 
+        $startTime = $this->millisecond();
+
         try {
             $strResponse = $client->post($apiUrl, ['json' => $param])->getBody()->getContents();
         } catch (\Exception $e) {
             $strResponse = $e->getMessage();
             return ['code' => 550, 'message' => $strResponse];
         } finally {
-            $this->monitorProcess($path, json_encode($param, JSON_UNESCAPED_UNICODE), $strResponse);
+            $expendTime = intval($this->millisecond() - $startTime);
+            $this->monitorProcess($path, json_encode($param, JSON_UNESCAPED_UNICODE), $strResponse, $expendTime);
         }
 
         if (!$strResponse) {
@@ -279,8 +282,19 @@ class OpenCaterClient
      * @param $path
      * @param $strRequest
      * @param $strResponse
+     * @param int $expendTime
      */
-    public function monitorProcess($path, $strRequest, $strResponse)
+    public function monitorProcess($path, $strRequest, $strResponse, $expendTime = -1)
     {
+    }
+
+    /**
+     * 获取当前时间毫秒时间戳
+     * @return float
+     */
+    protected function millisecond()
+    {
+        list($mSec, $sec) = explode(' ', microtime());
+        return (float)sprintf('%.0f', (floatval($mSec) + floatval($sec)) * 1000);
     }
 }
