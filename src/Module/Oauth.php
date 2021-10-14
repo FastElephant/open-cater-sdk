@@ -11,13 +11,15 @@ trait Oauth
 {
     /**
      * 获取绑定地址
-     * @param $bindShopId
-     * @return array
+     * @param string $partnerPoiCode
+     * @param int $bindShopId
+     * @return mixed
      */
-    public function getBindUrl($bindShopId)
+    public function getBindUrl($partnerPoiCode = '', $bindShopId = 0)
     {
         $param = [
             'bind_shop_id' => $bindShopId,
+            'partner_poi_code' => $partnerPoiCode
         ];
         return $this->call('shop/oauth/bind-url', $param);
     }
@@ -64,12 +66,14 @@ trait Oauth
     /**
      * 根据手机号同步授权
      * @param $phone
-     * @return array
+     * @param string $partnerPoiCode
+     * @return mixed
      */
-    public function syncAuth($phone)
+    public function syncAuth($phone, $partnerPoiCode = '')
     {
         $param = [
             'phone' => $phone,
+            'partner_poi_code' => $partnerPoiCode
         ];
         return $this->call('shop/oauth-mirror/sync', $param);
     }
