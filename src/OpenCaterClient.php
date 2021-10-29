@@ -226,6 +226,7 @@ class OpenCaterClient
             'order/delivery/fee' => '获取配送费',
             'order/delivery/call' => '呼叫配送',
             'order/delivery/cancel' => '取消配送',
+            'order/delivery/append-gratuity' => '追加配送小费',
             'im/status' => '获取门店IM状态',
             'im/update-status' => '设置门店IM状态',
             'im/read-msg' => '阅读IM消息',
