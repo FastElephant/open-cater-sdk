@@ -94,4 +94,19 @@ trait Delivery
         ];
         return $this->call('order/delivery/cancel', $param);
     }
+
+    /**
+     * 配送追加小费
+     * @param $orderId
+     * @param $amount
+     * @return mixed
+     */
+    public function appendDeliveryGratuity($orderId, $amount)
+    {
+        $param = [
+            'order_id' => $orderId,
+            'amount' => $amount
+        ];
+        return $this->call('order/delivery/append-gratuity', $param);
+    }
 }
