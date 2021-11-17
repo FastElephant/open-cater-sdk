@@ -16,16 +16,20 @@ trait Delivery
      * @param int $logisticsId
      * @param string $riderName
      * @param string $riderPhone
+     * @param string $latitude
+     * @param string $longitude
      * @return array
      */
-    public function syncDeliveryState($orderId, $state, $logisticsId = -1, $riderName = '', $riderPhone = '')
+    public function syncDeliveryState($orderId, $state, $logisticsId = -1, $riderName = '', $riderPhone = '', $latitude = '', $longitude = '')
     {
         $param = [
             'order_id' => $orderId,
             'rider_name' => $riderName,
             'rider_phone' => $riderPhone,
             'state' => $state,
-            'logistics_id' => $logisticsId
+            'logistics_id' => $logisticsId,
+            'latitude' => $latitude,
+            'longitude' => $longitude
         ];
         return $this->call('order/delivery/sync-state', $param);
     }
