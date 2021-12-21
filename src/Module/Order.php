@@ -93,6 +93,21 @@ trait Order
     }
 
     /**
+     * 刷新菜品数据
+     * @param $orderId
+     * @param string $notifyUrl
+     * @return array
+     */
+    public function flushDish($orderId, $notifyUrl = '')
+    {
+        $param = [
+            'order_id' => $orderId,
+            'notify_url' => $notifyUrl
+        ];
+        return $this->call('order/flush-dish', $param);
+    }
+
+    /**
      * 取消订单
      * @param $orderId
      * @param $type

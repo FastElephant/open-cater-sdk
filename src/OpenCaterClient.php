@@ -222,6 +222,7 @@ class OpenCaterClient
             'order/cancel-order' => '取消订单',
             'order/origin-detail' => '获取订单原始数据',
             'order/dish-detail' => '获取菜品详情',
+            'order/flush-dish' => '刷新菜品数据',
             'order/complete-order' => '完成订单',
             'order/delivery/fee' => '获取配送费',
             'order/delivery/call' => '呼叫配送',
