@@ -80,6 +80,19 @@ trait Order
     }
 
     /**
+     * 获取订单数据
+     * @param $orderId
+     * @return array
+     */
+    public function getOrderDetail($orderId)
+    {
+        $param = [
+            'order_id' => $orderId
+        ];
+        return $this->call('order/detail', $param);
+    }
+
+    /**
      * 获取菜品数据
      * @param $orderId
      * @return array
