@@ -70,6 +70,19 @@ trait Delivery
     }
 
     /**
+     * 获取骑手位置
+     * @param $orderId
+     * @return array
+     */
+    public function getLocation($orderId)
+    {
+        $param = [
+            'order_id' => $orderId,
+        ];
+        return $this->call('order/delivery/location', $param);
+    }
+
+    /**
      * 呼叫配送
      * @param $partnerOrderId
      * @param $orderId
