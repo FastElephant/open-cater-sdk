@@ -2,6 +2,7 @@
 
 namespace FastElephant\OpenCater;
 
+use FastElephant\OpenCater\Module\Ai;
 use FastElephant\OpenCater\Module\Comment;
 use FastElephant\OpenCater\Module\Delivery;
 use FastElephant\OpenCater\Module\Im;
@@ -14,7 +15,7 @@ use GuzzleHttp\Client;
 
 class OpenCaterClient
 {
-    use Order, Delivery, Product, Shop, Oauth, Comment, Im, Pick;
+    use Order, Delivery, Product, Shop, Oauth, Comment, Im, Pick, Ai;
 
     /**
      * 请求地址
@@ -237,6 +238,7 @@ class OpenCaterClient
             'comment/list' => '获取评论列表',
             'comment/reply' => '回复评论',
             'comment/score' => '获取门店评分',
+            'ai/tts' => '语音合成'
         ];
         return $toEventName[$path] ?? '未定义事件';
     }
