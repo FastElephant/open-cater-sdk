@@ -142,7 +142,7 @@ class OpenCaterClient
      * @param $param
      * @return array
      */
-    protected function call($path, $param = [])
+    public function call($path, $param = [])
     {
         $apiUrl = $this->url . $path;
 
@@ -240,7 +240,7 @@ class OpenCaterClient
             'comment/score' => '获取门店评分',
             'ai/tts' => '语音合成'
         ];
-        return $toEventName[$path] ?? '未定义事件';
+        return $toEventName[$path] ?? $path;
     }
 
     /**
