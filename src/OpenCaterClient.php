@@ -166,8 +166,13 @@ class OpenCaterClient
         try {
             $strResponse = $client->post($apiUrl, ['json' => $param])->getBody()->getContents();
         } catch (\Exception $e) {
-            $strResponse = $e->getMessage();
-            return ['code' => 550, 'message' => $strResponse];
+            if ($e instanceof \GuzzleHttp\Exception\RequestException && $e->hasResponse()) {
+                $r = $e->getResponse();
+                $strResponse = $r->getBody()->getContents() ?? '';
+            } else {
+                $strResponse = $e->getMessage();
+                return ['code' => 550, 'message' => $strResponse];
+            }
         } finally {
             $expendTime = intval($this->millisecond() - $startTime);
             $this->monitorProcess($path, json_encode($param, JSON_UNESCAPED_UNICODE), $strResponse, $expendTime);
