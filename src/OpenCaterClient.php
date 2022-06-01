@@ -281,6 +281,9 @@ class OpenCaterClient
             if (empty($v) && $v != 0) {
                 continue;
             }
+            if (is_array($v)) {
+                $v = md5(serialize($v));
+            }
             $str .= $k . $v;
         }
 
