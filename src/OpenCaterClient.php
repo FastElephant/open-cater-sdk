@@ -171,7 +171,7 @@ class OpenCaterClient
                 $strResponse = $r->getBody()->getContents() ?? '';
             } else {
                 $strResponse = $e->getMessage();
-                return ['code' => 550, 'message' => $strResponse];
+                return ['code' => 550, 'message' => $strResponse, 'request_id' => ''];
             }
         } finally {
             $expendTime = intval($this->millisecond() - $startTime);
@@ -179,21 +179,21 @@ class OpenCaterClient
         }
 
         if (!$strResponse) {
-            return ['code' => 555, 'message' => '响应值为空'];
+            return ['code' => 555, 'message' => '响应值为空', 'request_id' => ''];
         }
 
         $arrResponse = json_decode($strResponse, true);
         if (!$arrResponse) {
-            return ['code' => 555, 'message' => '响应值格式错误'];
+            return ['code' => 555, 'message' => '响应值格式错误', 'request_id' => ''];
         }
 
         $this->response = $arrResponse;
 
         if ($arrResponse['code'] != 0) {
-            return ['code' => $arrResponse['code'], 'message' => $arrResponse['message']];
+            return ['code' => $arrResponse['code'], 'message' => $arrResponse['message'], 'request_id' => $arrResponse['request_id'] ?? ''];
         }
 
-        return ['code' => 0, 'result' => $arrResponse['result']];
+        return ['code' => 0, 'result' => $arrResponse['result'], 'request_id' => $arrResponse['request_id'] ?? ''];
     }
 
     /**
