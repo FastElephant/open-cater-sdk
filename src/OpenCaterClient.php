@@ -282,7 +282,7 @@ class OpenCaterClient
                 continue;
             }
             if (is_array($v)) {
-                $v = md5(serialize($v));
+                continue;
             }
             $str .= $k . $v;
         }
